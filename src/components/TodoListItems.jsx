@@ -4,7 +4,7 @@ import useCommentStore from '../store/commentStore'
 import CommentBox from './CommentBox'
 import TodoItemContent from './TodoItemContent'
 
-function TodoListItems() {
+function TodoListItems({searchKeyword}) {
   const todoList = useTodoStore((state) => state.todoList)
   const toggleCompleted = useTodoStore((state) => state.toggleCompleted)
   const deleteTodo = useTodoStore((state) => state.deleteTodo)
@@ -29,9 +29,13 @@ function TodoListItems() {
     setEditingId(null)
   }
 
+  const filteredTodos = todoList.filter(todo =>
+    todo.text.toLowerCase().includes(searchKeyword.toLowerCase())
+  )
+
   return (
     <ul className='ml-2'>
-      {todoList.map((todo) => (
+      {filteredTodos.map((todo) => (
         <li className='mt-2' key={todo.id}>
           <input
             type='checkbox'

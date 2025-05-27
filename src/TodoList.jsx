@@ -2,11 +2,12 @@ import React, { useState } from 'react'
 import useTodoStore from './store/todoStore'
 import TodoInput from './components/TodoInput'
 import TodoListItems from './components/TodoListItems'
-
+import SearchBar from './components/SearchBar'
 
 function TodoList() {
   const showInput = useTodoStore((state) => state.showInput) 
   const toggleInput = useTodoStore((state) => state.toggleInput)
+  const [searchKeyword, setSearchKeyword] = useState('')
   
   return (
     <div className='flex flex-col justify-start items-center min-h-screen pt-8 bg-gray-100'>
@@ -20,9 +21,13 @@ function TodoList() {
         </button>
       </div>
 
+      <div className='mb-4 w-1/2'>
+        <SearchBar searchKeyword={searchKeyword} setSearchKeyword={setSearchKeyword} />
+      </div>
+
       {showInput && <TodoInput />}
 
-      <TodoListItems />
+      <TodoListItems searchKeyword={searchKeyword} />
     </div>
   )
 }
