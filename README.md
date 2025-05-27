@@ -1,3 +1,22 @@
+# Project design
+src/
+├── App.vue
+├── main.js
+├── index.css
+├── index.html
+├── TodoList.jsx
+│ 
+├── components/
+│   ├── CommentBox.jsx
+│   ├── SearchBar.jsx   // Not finish yet
+│   ├── TodoInput.jsx   
+│   ├── TodoItemContent.jsx   
+│   └── TodoListItems.jsx   
+│
+└── store/
+    ├── commentStore.js
+    └── todoStore.js
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
