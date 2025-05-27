@@ -1,4 +1,5 @@
 # Project design
+```
 src/
 ├── App.vue
 ├── main.js
@@ -16,6 +17,7 @@ src/
 └── store/
     ├── commentStore.js
     └── todoStore.js
+```
 
 # React + Vite
 
