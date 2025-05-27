@@ -35,7 +35,8 @@ function TodoListItems({searchKeyword}) {
 
   return (
     <ul className='ml-2'>
-      {filteredTodos.map((todo) => (
+      {filteredTodos.length > 0 ? (
+        filteredTodos.map((todo) => (
         <li className='mt-2' key={todo.id}>
           <input
             type='checkbox'
@@ -74,7 +75,9 @@ function TodoListItems({searchKeyword}) {
 
           <CommentBox todoId={todo.id} showInput={visibleComments[todo.id]} />
         </li>
-      ))}
+      ))) : (
+        <li className='text-gray-500 italic mt-2 ml-2'>No such task is on the list. Or you can add a new task now.</li>
+      )}
     </ul>
   )
 }
