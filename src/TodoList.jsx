@@ -10,7 +10,7 @@ function TodoList() {
   const [searchKeyword, setSearchKeyword] = useState('')
   
   return (
-    <div className='flex flex-col justify-start items-center min-h-screen pt-8 bg-gray-100'>
+    <div className='flex flex-col justify-start items-center min-h-screen pt-8 pb-5 bg-gray-100'>
       <h1 className='text-5xl font-bold mb-8'>TODO LIST</h1>
       <div className='mb-4'>
         <button

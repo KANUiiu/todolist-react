@@ -2,29 +2,48 @@ import { create } from 'zustand'
 
 const useTodoStore = create((set, get) => ({
   todoList: [],
-  addTodo: (text, date, category) =>
-    set((state) => ({
+
+  addTodo: (text, date, category) =>{
+    const todoList = get().todoList
+    set({
       todoList: [
-        ...state.todoList,
+        ...todoList,
         {
-          id: state.todoList.length + 1,
+          id: Date.now(), //suggested by ChatGPT to have one unique id every time
           text,
           date,
           category,
           completed: false,
         },
-      ],
-    })),
-  toggleCompleted: (id) =>
+      ]
+    })
+  },
+    
+  // addTodo: (text, date, category) =>
+  //   set((state) => ({
+  //     todoList: [
+  //       ...state.todoList,
+  //       {
+  //         id: state.todoList.length + 1,
+  //         text,
+  //         date,
+  //         category,
+  //         completed: false,
+  //       },
+  //     ],
+  //   })),
+
+  toggleCompleted: (id) => 
     set((state) => ({
       todoList: state.todoList.map((todo) =>
-        todo.id === id ? { ...todo, completed: !todo.completed } : todo
-      ),
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo),
     })),
+    
   deleteTodo: (id) =>
     set((state) => ({
       todoList: state.todoList.filter((todo) => todo.id !== id),
     })),
+
   updateTodo: (id, newText, newDate, newCategory) =>
     set((state) => ({
         todoList: state.todoList.map((todo) =>
@@ -40,10 +59,11 @@ const useTodoStore = create((set, get) => ({
   })),
 
   showInput: false,
-  toggleInput: () =>
-    set((state) => ({
-      showInput: !state.showInput,
-    })),
+
+  toggleInput: () => {
+    const showInput = get().showInput
+    set({showInput: !showInput})
+  },
 }))
 
 export default useTodoStore

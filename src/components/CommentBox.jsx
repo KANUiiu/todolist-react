@@ -41,64 +41,72 @@ function CommentBox({ todoId, showInput }) {
   return (
     <div className='mt-2 ml-6'>
       {showInput && (
-        <div className='input-box'>
-          <input
-            type='text'
+        <div className='input-box flex items-center'>
+          <textarea
             placeholder='Write a comment...'
+            rows={3}
             value={commentInput}
             onChange={(e) => setCommentInput(e.target.value)}
-            className='border px-2 py-1 mr-2 text-sm'
+            className='border px-2 py-1 text-sm w-[300px] resize-none rounded'
           />
           <button
             onClick={handleAdd}
-            className='bg-green-500 text-white text-sm px-2 py-0.5 rounded hover:bg-green-600'
+            className='bg-green-500 text-white text-sm ml-2 px-2 py-0.5 rounded hover:bg-green-600'
           >
             SUBMIT
           </button>
         </div>
       )}
       <div className='content-box'>
-        <ul className='mt-2 text-sm text-gray-600 flex'>
+        <ul className='mt-4 text-sm text-gray-600 flex flex-col w-full'>
           {(comments[todoId] || []).map((comment) => (
             <li 
               key={comment.id}
-              className='mb-2 flex items-center'
+              className='mb-2 w-full'
             >
               { editingId === comment.id ? (
                 <>
-                  <input
-                    value={editText}
-                    onChange={(e) => setEditText(e.target.value)}
-                    className='border px-2 py-1 text-sm'
-                  />
-                  <button
-                    onClick={handleSave}
-                    className='ml-2 text-green-600 hover:underline'
-                  >
-                    SAVE
-                  </button>
-                  <button
-                    onClick={handleCancel}
-                    className='ml-2 text-gray-500 hover:underline'
-                  >
-                    CANCEL
-                  </button>
+                  <div className="flex justify-between items-center w-full">
+                    <textarea
+                      placeholder='Write a comment...'
+                      value={editText}
+                      rows={3}
+                      onChange={(e) => setEditText(e.target.value)}
+                      className='border px-2 py-1 text-sm w-[300px] resize-none rounded'
+                    />
+                    <div className='flex ml-2 gap-4'>
+                      <button
+                        onClick={handleSave}
+                        className='ml-2 text-green-600 hover:underline'
+                      >
+                        SAVE
+                      </button>
+                      <button
+                        onClick={handleCancel}
+                        className='ml-2 text-gray-500 hover:underline'
+                      >
+                        CANCEL
+                      </button>
+                    </div> 
+                  </div>
                 </>
               ) : (
                 <>
-                  <span>– {comment.text}</span>
-                  <button 
-                    className='ml-8'
-                    onClick={() => handleEdit(comment)}
-                  >
-                    EDIT
-                  </button>
-                  <button 
-                    className='ml-4'
-                    onClick={() => deleteComment(todoId, comment.id)}
-                  >
-                    DELETE
-                  </button>
+                <div className='flex justify-between items-center mt-2 w-full'>
+                    <span className="break-words max-w-md block">📝 {comment.text}</span>
+                    <div className='flex ml-2 gap-4'>
+                      <button 
+                        onClick={() => handleEdit(comment)} 
+                      >
+                        EDIT
+                      </button>
+                      <button 
+                        onClick={() => deleteComment(todoId, comment.id)}
+                      >
+                        DELETE
+                      </button>
+                    </div>    
+                </div>  
                 </>
               )}
             </li>
